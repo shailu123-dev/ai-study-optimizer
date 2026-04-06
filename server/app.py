@@ -1,49 +1,49 @@
 from fastapi import FastAPI
+from pydantic import BaseModel
+import uvicorn
 
 app = FastAPI()
 
-# Dummy state
+# -------- STATE --------
 state = {
     "focus_level": 50,
     "energy_level": 50
 }
 
-# ✅ REQUIRED: RESET (POST)
+# -------- REQUEST MODEL --------
+class Action(BaseModel):
+    action: str
+
+# -------- RESET (VERY IMPORTANT) --------
 @app.post("/reset")
-async def reset():
+def reset():
     global state
     state = {
         "focus_level": 50,
         "energy_level": 50
     }
-    return {"message": "Environment reset", "state": state}
+    return {"status": "reset successful", "state": state}
 
-
-# ✅ REQUIRED: STEP (POST)
+# -------- STEP --------
 @app.post("/step")
-async def step(action: dict):
+def step(action: Action):
     global state
-    
-    # simple logic
-    if action.get("action") == "study":
+
+    if action.action == "study":
         state["focus_level"] += 5
-    elif action.get("action") == "rest":
+    elif action.action == "rest":
         state["energy_level"] += 5
 
     return {"state": state}
 
-
-# ✅ REQUIRED: GET STATE (GET)
+# -------- GET STATE --------
 @app.get("/state")
-async def get_state():
+def get_state():
     return state
 
-
-# ✅ REQUIRED ENTRY POINT
+# -------- ENTRY POINT --------
 def main():
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
+    uvicorn.run(app, host="0.0.0.0", port=7860)
 
 if __name__ == "__main__":
     main()
