@@ -1,0 +1,24 @@
+[project.scripts]
+server = "server.app:main"
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-study-optimizer"
+version = "0.1.0"
+description = "AI Study Optimizer: Hackathon project for improving study focus and efficiency using AI"
+authors = [
+    { name="Shailaja", email="okayshailu5126@gmail.com" }
+]
+dependencies = [
+    "openenv-core==0.2.3",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "matplotlib"
+]
+
+[tool.openenv]
+# mode = "multi"
+# entry = "main.py"

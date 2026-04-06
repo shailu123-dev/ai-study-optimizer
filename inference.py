@@ -1,3 +1,5 @@
+def infer():
+    return {"message": "Inference working"}
 from tasks.easy import run_easy_task
 from tasks.medium import run_medium_task
 from tasks.hard import run_hard_task
