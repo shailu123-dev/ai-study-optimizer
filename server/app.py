@@ -6,7 +6,8 @@ app = FastAPI()
 def home():
     return {"message": "API Running"}
 
-@app.api_route("/reset", methods=["GET", "POST"])
+# ✅ ADD THIS (THIS IS MISSING)
+@app.post("/reset")
 def reset():
     return {
         "status": "success",
